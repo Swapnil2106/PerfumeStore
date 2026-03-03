@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PerfumeStore.Data;
 using PerfumeStore.DTOs;
+using PerfumeStore.Models;
 
 namespace PerfumeStore.Services
 {
@@ -24,6 +25,22 @@ namespace PerfumeStore.Services
                 }).ToListAsync();
 
             return perfumeCategoriesList;
+        }
+
+        public async Task<PerfumeCategoryDTO> CreatePerfumeCategory(CreatePerfumeCategoryDTO dto)
+        {
+            var perfumeCategory = new PerfumeCategory
+            {
+                Name = dto.Name
+            };
+            dbContext.PerfumeCategories.Add(perfumeCategory);
+            await dbContext.SaveChangesAsync();
+
+            return new PerfumeCategoryDTO
+            {
+                Id = perfumeCategory.Id,
+                Name = perfumeCategory.Name
+            };
         }
     }
 }
