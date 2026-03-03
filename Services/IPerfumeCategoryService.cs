@@ -6,6 +6,6 @@ namespace PerfumeStore.Services
     {
         Task<IEnumerable<PerfumeCategoryDTO>> GetAllPerfumeCategories();
 
-        Task<PerfumeCategoryDTO> CreatePerfumeCategory(CreatePerfumeCategoryDTO dto);
+        Task<PerfumeCategoryDTO> AddPerfumeCategory(AddPerfumeCategoryDTO dto);
     }
 }

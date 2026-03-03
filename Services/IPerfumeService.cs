@@ -5,5 +5,6 @@ namespace PerfumeStore.Services
     public interface IPerfumeService
     {
         Task<IEnumerable<PerfumeDTO>> GetAllPerfumes();
+        Task<PerfumeDTO> AddPerfume(AddPerfumeDTO dto);
     }
 }

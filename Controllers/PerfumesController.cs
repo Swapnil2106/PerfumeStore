@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PerfumeStore.DTOs;
 using PerfumeStore.Services;
 
 namespace PerfumeStore.Controllers
@@ -21,6 +22,14 @@ namespace PerfumeStore.Controllers
             var perfumes = await perfumeService.GetAllPerfumes();
 
             return Ok(perfumes);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePerfume(AddPerfumeDTO dto)
+        {
+            var addedPerfume = await perfumeService.AddPerfume(dto);
+
+            return Ok(addedPerfume);
         }
     }
 }

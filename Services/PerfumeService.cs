@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PerfumeStore.Data;
 using PerfumeStore.DTOs;
+using PerfumeStore.Models;
 
 namespace PerfumeStore.Services
 {
@@ -29,6 +30,32 @@ namespace PerfumeStore.Services
                 }).ToListAsync();
 
             return perfumesList;
+        }
+
+        public async Task<PerfumeDTO> AddPerfume(AddPerfumeDTO dto)
+        {
+            var createPerfume = new Perfume
+            {
+                Name = dto.Name,
+                Price = dto.Price,
+                PerfumeCategoryId = dto.PerfumeCategoryId,
+                PerfumeTypeId = dto.PerfumeTypeId
+            };
+
+            dbContext.Perfumes.Add(createPerfume);
+            await dbContext.SaveChangesAsync();
+
+            var category = await dbContext.PerfumeCategories.FirstOrDefaultAsync(pc => pc.Id == dto.PerfumeCategoryId);
+            var type = await dbContext.PerfumeTypes.FirstOrDefaultAsync(pt => pt.Id == dto.PerfumeTypeId);
+
+            return new PerfumeDTO
+            {
+                Id = createPerfume.Id,
+                Name = createPerfume.Name,
+                Price = createPerfume.Price,
+                Category = category.Name,
+                Type = type.Name
+            };
         }
     }
 }

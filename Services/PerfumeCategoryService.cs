@@ -27,7 +27,7 @@ namespace PerfumeStore.Services
             return perfumeCategoriesList;
         }
 
-        public async Task<PerfumeCategoryDTO> CreatePerfumeCategory(CreatePerfumeCategoryDTO dto)
+        public async Task<PerfumeCategoryDTO> AddPerfumeCategory(AddPerfumeCategoryDTO dto)
         {
             var perfumeCategory = new PerfumeCategory
             {

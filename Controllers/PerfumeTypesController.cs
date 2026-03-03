@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PerfumeStore.DTOs;
 using PerfumeStore.Services;
 
 namespace PerfumeStore.Controllers
@@ -21,6 +22,14 @@ namespace PerfumeStore.Controllers
             var types = await perfumeTypeService.GetAllPerfumeTypes();
 
             return Ok(types);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddType(AddPerfumeTypeDTO dto)
+        {
+            var createdType = await perfumeTypeService.AddPerfumeType(dto);
+
+            return Ok(createdType);
         }
     }
 }
