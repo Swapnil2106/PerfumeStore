@@ -39,5 +39,13 @@ namespace PerfumeStore.Controllers
 
             return Ok(perfume);
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePerfume(int id, UpdatePerfumeDTO dto)
+        {
+            var updatedPerfume = await perfumeService.UpdatePerfume(id, dto);
+
+            return Ok(updatedPerfume);
+        }
     }
 }

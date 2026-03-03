@@ -76,5 +76,32 @@ namespace PerfumeStore.Services
 
             return perfume;
         }
+
+        public async Task<PerfumeDTO> UpdatePerfume(int id, UpdatePerfumeDTO dto)
+        {
+            //Here we cannot use use the above existing method to fetch the details as it has asNoTracking method.
+            var perfumeEntity = await dbContext.Perfumes.FirstOrDefaultAsync(pc => pc.Id == id);
+
+            perfumeEntity.Name = dto.Name;
+            perfumeEntity.Price = dto.Price;
+            perfumeEntity.PerfumeCategoryId = dto.PerfumeCategoryId;
+            perfumeEntity.PerfumeTypeId = dto.PerfumeTypeId;
+            await dbContext.SaveChangesAsync();
+
+            var updatedPerfume = await dbContext.Perfumes
+            .AsNoTracking()
+            .Where(p => p.Id == id)
+            .Select(p => new PerfumeDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                Category = p.PerfumeCategory.Name,
+                Type = p.PerfumeType.Name
+            })
+            .FirstOrDefaultAsync();
+
+                return updatedPerfume;
+            }
     }
 }

@@ -53,5 +53,20 @@ namespace PerfumeStore.Services
                 Name = perfumeCategory.Name
             };
         }
+
+        public async Task<PerfumeCategoryDTO> UpdatePerfumeCategory(int id, UpdatePerfumeCategoryDTO dto)
+        {
+            //Here we cannot use use the above existing method to fetch the details as it has asNoTracking method.
+            var perfumeCategoryEntity = await dbContext.PerfumeCategories.FirstOrDefaultAsync(pc => pc.Id == id); 
+
+            perfumeCategoryEntity.Name = dto.Name;
+            await dbContext.SaveChangesAsync();
+
+            return new PerfumeCategoryDTO
+            {
+                Id = perfumeCategoryEntity.Id,
+                Name = perfumeCategoryEntity.Name
+            };
+        }
     }
 }
