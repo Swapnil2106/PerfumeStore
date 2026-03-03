@@ -45,6 +45,7 @@ namespace PerfumeStore.Services
             dbContext.Perfumes.Add(createPerfume);
             await dbContext.SaveChangesAsync();
 
+            //to avoid null reference error at line no 57 & 58
             var category = await dbContext.PerfumeCategories.FirstOrDefaultAsync(pc => pc.Id == dto.PerfumeCategoryId);
             var type = await dbContext.PerfumeTypes.FirstOrDefaultAsync(pt => pt.Id == dto.PerfumeTypeId);
 
@@ -56,6 +57,24 @@ namespace PerfumeStore.Services
                 Category = category.Name,
                 Type = type.Name
             };
+        }
+
+        public async Task<PerfumeDTO> GetPerfumeById(int id)
+        {
+            var perfume = await dbContext.Perfumes
+                .AsNoTracking()
+                .Where(p => p.Id == id)
+                .Select( p => new PerfumeDTO
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    Price = p.Price,
+                    Category = p.PerfumeCategory.Name,
+                    Type = p.PerfumeType.Name
+                })
+                .FirstOrDefaultAsync();
+
+            return perfume;
         }
     }
 }

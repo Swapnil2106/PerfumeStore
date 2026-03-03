@@ -31,5 +31,13 @@ namespace PerfumeStore.Controllers
 
             return Ok(addedPerfume);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPerfumeById(int id)
+        {
+            var perfume = await perfumeService.GetPerfumeById(id);
+
+            return Ok(perfume);
+        }
     }
 }

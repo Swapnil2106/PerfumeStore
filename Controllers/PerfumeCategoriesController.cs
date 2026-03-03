@@ -25,11 +25,19 @@ namespace PerfumeStore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCategory(AddPerfumeCategoryDTO dto)
+        public async Task<IActionResult> AddPerfumeCategory(AddPerfumeCategoryDTO dto)
         {
             var createdCategory = await perfumeCategoryService.AddPerfumeCategory(dto);
 
             return Ok(createdCategory);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPerfumeCategoryById(int id)
+        {
+            var perfumeCategory = await perfumeCategoryService.GetPerfumeCategoryById(id);
+
+            return Ok(perfumeCategory);
         }
     }
 }

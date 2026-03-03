@@ -42,5 +42,16 @@ namespace PerfumeStore.Services
                 Name = perfumeCategory.Name
             };
         }
+
+        public async Task<PerfumeCategoryDTO> GetPerfumeCategoryById(int id)
+        {
+            var perfumeCategory = await dbContext.PerfumeCategories.AsNoTracking().FirstOrDefaultAsync(pc => pc.Id == id);
+
+            return new PerfumeCategoryDTO
+            {
+                Id = perfumeCategory.Id,
+                Name = perfumeCategory.Name
+            };
+        }
     }
 }

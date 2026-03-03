@@ -6,5 +6,6 @@ namespace PerfumeStore.Services
     {
         Task<IEnumerable<PerfumeDTO>> GetAllPerfumes();
         Task<PerfumeDTO> AddPerfume(AddPerfumeDTO dto);
+        Task<PerfumeDTO> GetPerfumeById(int id);
     }
 }
