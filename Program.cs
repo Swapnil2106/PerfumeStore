@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using PerfumeStore.Data;
+
 namespace PerfumeStore
 {
     public class Program
@@ -6,6 +9,10 @@ namespace PerfumeStore
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            //DI
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));      
 
             // Add services to the container.
 
