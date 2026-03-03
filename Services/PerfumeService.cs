@@ -15,7 +15,7 @@ namespace PerfumeStore.Services
 
         public async Task<IEnumerable<PerfumeDTO>> GetAllPerfumes()
         {
-            var PerfumesList = await dbContext.Perfumes
+            var perfumesList = await dbContext.Perfumes
                 .AsNoTracking()
                 .Include(p => p.PerfumeCategory)
                 .Include(p => p.PerfumeType)
@@ -28,7 +28,7 @@ namespace PerfumeStore.Services
                     Type = p.PerfumeType.Name
                 }).ToListAsync();
 
-            return PerfumesList;
+            return perfumesList;
         }
     }
 }
