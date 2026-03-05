@@ -48,5 +48,12 @@ namespace PerfumeStore.Controllers
             return Ok(updatedPerfumeCategory);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePerfumeCategory(int id)
+        {
+            await perfumeCategoryService.DeletePerfumeCategory(id);
+            return NoContent(); // 204
+        }
+
     }
 }

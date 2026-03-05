@@ -102,6 +102,14 @@ namespace PerfumeStore.Services
             .FirstOrDefaultAsync();
 
                 return updatedPerfume;
-            }
+        }
+
+        public async Task DeletePerfume(int id)
+        {
+            var perfume = await dbContext.Perfumes.FirstOrDefaultAsync(c => c.Id == id);
+
+            dbContext.Perfumes.Remove(perfume);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

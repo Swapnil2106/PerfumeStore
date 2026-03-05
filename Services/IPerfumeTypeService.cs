@@ -8,5 +8,6 @@ namespace PerfumeStore.Services
         Task<PerfumeTypeDTO> AddPerfumeType(AddPerfumeTypeDTO dto);
         Task<PerfumeTypeDTO> GetPerfumeTypeById(int id);
         Task<PerfumeTypeDTO> UpdatePerfumeType(int Id, UpdatePerfumeTypeDTO dto);
+        Task DeletePerfumeType(int Id);
     }
 }

@@ -68,5 +68,18 @@ namespace PerfumeStore.Services
                 Name = perfumeCategoryEntity.Name
             };
         }
+
+        public async Task DeletePerfumeCategory(int id)
+        {
+            var category = await dbContext.PerfumeCategories.FirstOrDefaultAsync(c => c.Id == id);
+
+            var isUsed = await dbContext.Perfumes.AnyAsync(p => p.PerfumeCategoryId == id);
+            if (isUsed)
+                throw new InvalidOperationException("Cannot delete category. It is associated with existing perfumes.");
+
+            dbContext.PerfumeCategories.Remove(category);
+            await dbContext.SaveChangesAsync();
+        }
+
     }
 }
