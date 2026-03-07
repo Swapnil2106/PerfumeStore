@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PerfumeStore.Data;
 using PerfumeStore.Services;
+using PerfumeStore.Services.Interfaces;
 
 namespace PerfumeStore
 {

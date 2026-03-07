@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PerfumeStore.DTOs.Perfume;
-using PerfumeStore.Services;
+using PerfumeStore.Services.Interfaces;
 
 namespace PerfumeStore.Controllers
 {

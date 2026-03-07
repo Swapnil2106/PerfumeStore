@@ -1,7 +1,7 @@
 ﻿using PerfumeStore.DTOs.Category;
 using PerfumeStore.Models;
 
-namespace PerfumeStore.Services
+namespace PerfumeStore.Services.Interfaces
 {
     public interface ICategoryService
     {

@@ -2,6 +2,7 @@
 using PerfumeStore.Data;
 using PerfumeStore.DTOs.Type;
 using PerfumeStore.Models;
+using PerfumeStore.Services.Interfaces;
 
 namespace PerfumeStore.Services
 {

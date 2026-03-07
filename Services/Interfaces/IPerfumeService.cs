@@ -1,6 +1,6 @@
 ﻿using PerfumeStore.DTOs.Perfume;
 
-namespace PerfumeStore.Services
+namespace PerfumeStore.Services.Interfaces
 {
     public interface IPerfumeService
     {
