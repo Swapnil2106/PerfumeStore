@@ -24,7 +24,10 @@ namespace PerfumeStore.Services
                 {
                     Id = p.Id,
                     Name = p.Name,
+                    Description = p.Description,                    
                     Price = p.Price,
+                    StockQuantity = p.StockQuantity,
+                    ImageUrl = p.ImageUrl,
                     Category = p.Category.Name,
                     Type = p.Type.Name
                 }).ToListAsync();
@@ -37,7 +40,10 @@ namespace PerfumeStore.Services
             var createPerfume = new Perfume
             {
                 Name = dto.Name,
+                Description = dto.Description,
                 Price = dto.Price,
+                StockQuantity = dto.StockQuantity,
+                ImageUrl = dto.ImageUrl,
                 CategoryId = dto.PerfumeCategoryId,
                 TypeId = dto.PerfumeTypeId
             };
@@ -53,7 +59,10 @@ namespace PerfumeStore.Services
             {
                 Id = createPerfume.Id,
                 Name = createPerfume.Name,
+                Description = createPerfume.Description,
                 Price = createPerfume.Price,
+                StockQuantity = createPerfume.StockQuantity,
+                ImageUrl = createPerfume.ImageUrl,
                 Category = category.Name,
                 Type = type.Name
             };
@@ -68,7 +77,10 @@ namespace PerfumeStore.Services
                 {
                     Id = p.Id,
                     Name = p.Name,
+                    Description = p.Description,
                     Price = p.Price,
+                    StockQuantity = p.StockQuantity,
+                    ImageUrl = p.ImageUrl,
                     Category = p.Category.Name,
                     Type = p.Type.Name
                 })
@@ -83,7 +95,10 @@ namespace PerfumeStore.Services
             var perfumeEntity = await dbContext.Perfumes.FirstOrDefaultAsync(pc => pc.Id == id);
 
             perfumeEntity.Name = dto.Name;
+            perfumeEntity.Description = dto.Description;
             perfumeEntity.Price = dto.Price;
+            perfumeEntity.StockQuantity = dto.StockQuantity;
+            perfumeEntity.ImageUrl = dto.ImageUrl;
             perfumeEntity.CategoryId = dto.PerfumeCategoryId;
             perfumeEntity.TypeId = dto.PerfumeTypeId;
             await dbContext.SaveChangesAsync();
@@ -95,7 +110,10 @@ namespace PerfumeStore.Services
             {
                 Id = p.Id,
                 Name = p.Name,
+                Description = p.Description,
                 Price = p.Price,
+                StockQuantity = p.StockQuantity,
+                ImageUrl = p.ImageUrl,
                 Category = p.Category.Name,
                 Type = p.Type.Name
             })
