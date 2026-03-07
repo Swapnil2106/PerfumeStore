@@ -11,8 +11,8 @@ namespace PerfumeStore.Data
         }
 
         public DbSet<Perfume> Perfumes { get; set; }
-        public DbSet<PerfumeCategory> PerfumeCategories { get; set; }
-        public DbSet<PerfumeType> PerfumeTypes { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Models.Type> Types { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -46,8 +46,8 @@ namespace PerfumeStore.Services
             await dbContext.SaveChangesAsync();
 
             //to avoid null reference error at line no 57 & 58
-            var category = await dbContext.PerfumeCategories.FirstOrDefaultAsync(pc => pc.Id == dto.PerfumeCategoryId);
-            var type = await dbContext.PerfumeTypes.FirstOrDefaultAsync(pt => pt.Id == dto.PerfumeTypeId);
+            var category = await dbContext.Categories.FirstOrDefaultAsync(pc => pc.Id == dto.PerfumeCategoryId);
+            var type = await dbContext.Types.FirstOrDefaultAsync(pt => pt.Id == dto.PerfumeTypeId);
 
             return new PerfumeDTO
             {

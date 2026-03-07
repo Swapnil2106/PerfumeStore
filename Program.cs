@@ -17,8 +17,8 @@ namespace PerfumeStore
 
             //Register Services
             builder.Services.AddScoped<IPerfumeService, PerfumeService>();
-            builder.Services.AddScoped<IPerfumeCategoryService, PerfumeCategoryService>();
-            builder.Services.AddScoped<IPerfumeTypeService, PerfumeTypeService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ITypeService, TypeService>();
 
             // Add services to the container.
             builder.Services.AddControllers();

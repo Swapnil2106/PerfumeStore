@@ -7,27 +7,27 @@ namespace PerfumeStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PerfumeTypesController : ControllerBase
+    public class TypesController : ControllerBase
     {
-        private readonly IPerfumeTypeService perfumeTypeService;
+        private readonly ITypeService typeService;
 
-        public PerfumeTypesController(IPerfumeTypeService _perfumeTypeService)
+        public TypesController(ITypeService _typeService)
         {
-            perfumeTypeService = _perfumeTypeService;
+            typeService = _typeService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllPerfumeTypes()
         {
-            var types = await perfumeTypeService.GetAllPerfumeTypes();
+            var types = await typeService.GetAllPerfumeTypes();
 
             return Ok(types);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPerfumeType(AddPerfumeTypeDTO dto)
+        public async Task<IActionResult> AddPerfumeType(AddTypeDTO dto)
         {
-            var createdType = await perfumeTypeService.AddPerfumeType(dto);
+            var createdType = await typeService.AddPerfumeType(dto);
 
             return Ok(createdType);
         }
@@ -35,15 +35,15 @@ namespace PerfumeStore.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPerfumeTypeById(int id)
         {
-            var perfumeType = await perfumeTypeService.GetPerfumeTypeById(id);
+            var perfumeType = await typeService.GetPerfumeTypeById(id);
 
             return Ok(perfumeType);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePerfumeType(int id, UpdatePerfumeTypeDTO dto)
+        public async Task<IActionResult> UpdatePerfumeType(int id, UpdateTypeDTO dto)
         {
-            var updatedPerfumeType = await perfumeTypeService.UpdatePerfumeType(id, dto);
+            var updatedPerfumeType = await typeService.UpdatePerfumeType(id, dto);
 
             return Ok(updatedPerfumeType);
         }
@@ -51,7 +51,7 @@ namespace PerfumeStore.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePerfumeType(int id)
         {
-            await perfumeTypeService.DeletePerfumeType(id);
+            await typeService.DeletePerfumeType(id);
             return NoContent(); // 204
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace PerfumeStore.DTOs
 {
-    public class AddPerfumeCategoryDTO
+    public class UpdateTypeDTO
     {
         public string Name { get; set; }
     }

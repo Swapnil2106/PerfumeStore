@@ -21,6 +21,23 @@ namespace PerfumeStore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("PerfumeStore.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("PerfumeStore.Models.Perfume", b =>
                 {
                     b.Property<int>("Id")
@@ -28,6 +45,12 @@ namespace PerfumeStore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -42,6 +65,9 @@ namespace PerfumeStore.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("StockQuantity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PerfumeCategoryId");
@@ -51,7 +77,7 @@ namespace PerfumeStore.Migrations
                     b.ToTable("Perfumes");
                 });
 
-            modelBuilder.Entity("PerfumeStore.Models.PerfumeCategory", b =>
+            modelBuilder.Entity("PerfumeStore.Models.Type", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,35 +91,18 @@ namespace PerfumeStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PerfumeCategories");
-                });
-
-            modelBuilder.Entity("PerfumeStore.Models.PerfumeType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PerfumeTypes");
+                    b.ToTable("Types");
                 });
 
             modelBuilder.Entity("PerfumeStore.Models.Perfume", b =>
                 {
-                    b.HasOne("PerfumeStore.Models.PerfumeCategory", "PerfumeCategory")
+                    b.HasOne("PerfumeStore.Models.Category", "PerfumeCategory")
                         .WithMany("Perfumes")
                         .HasForeignKey("PerfumeCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PerfumeStore.Models.PerfumeType", "PerfumeType")
+                    b.HasOne("PerfumeStore.Models.Type", "PerfumeType")
                         .WithMany("Perfumes")
                         .HasForeignKey("PerfumeTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -104,12 +113,12 @@ namespace PerfumeStore.Migrations
                     b.Navigation("PerfumeType");
                 });
 
-            modelBuilder.Entity("PerfumeStore.Models.PerfumeCategory", b =>
+            modelBuilder.Entity("PerfumeStore.Models.Category", b =>
                 {
                     b.Navigation("Perfumes");
                 });
 
-            modelBuilder.Entity("PerfumeStore.Models.PerfumeType", b =>
+            modelBuilder.Entity("PerfumeStore.Models.Type", b =>
                 {
                     b.Navigation("Perfumes");
                 });

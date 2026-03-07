@@ -5,20 +5,20 @@ using PerfumeStore.Models;
 
 namespace PerfumeStore.Services
 {
-    public class PerfumeCategoryService: IPerfumeCategoryService
+    public class CategoryService: ICategoryService
     {
         private readonly ApplicationDbContext dbContext;
 
-        public PerfumeCategoryService(ApplicationDbContext _dbContext)
+        public CategoryService(ApplicationDbContext _dbContext)
         {
             dbContext = _dbContext;
         }
 
-        public async Task<IEnumerable<PerfumeCategoryDTO>> GetAllPerfumeCategories()
+        public async Task<IEnumerable<CategoryDTO>> GetAllPerfumeCategories()
         {
-            var perfumeCategoriesList = await dbContext.PerfumeCategories
+            var perfumeCategoriesList = await dbContext.Categories
                 .AsNoTracking()
-                .Select(pc => new PerfumeCategoryDTO
+                .Select(pc => new CategoryDTO
                 {
                     Id = pc.Id,
                     Name = pc.Name
@@ -27,42 +27,42 @@ namespace PerfumeStore.Services
             return perfumeCategoriesList;
         }
 
-        public async Task<PerfumeCategoryDTO> AddPerfumeCategory(AddPerfumeCategoryDTO dto)
+        public async Task<CategoryDTO> AddPerfumeCategory(AddCategoryDTO dto)
         {
-            var perfumeCategory = new PerfumeCategory
+            var perfumeCategory = new Category
             {
                 Name = dto.Name
             };
-            dbContext.PerfumeCategories.Add(perfumeCategory);
+            dbContext.Categories.Add(perfumeCategory);
             await dbContext.SaveChangesAsync();
 
-            return new PerfumeCategoryDTO
+            return new CategoryDTO
             {
                 Id = perfumeCategory.Id,
                 Name = perfumeCategory.Name
             };
         }
 
-        public async Task<PerfumeCategoryDTO> GetPerfumeCategoryById(int id)
+        public async Task<CategoryDTO> GetPerfumeCategoryById(int id)
         {
-            var perfumeCategory = await dbContext.PerfumeCategories.AsNoTracking().FirstOrDefaultAsync(pc => pc.Id == id);
+            var perfumeCategory = await dbContext.Categories.AsNoTracking().FirstOrDefaultAsync(pc => pc.Id == id);
 
-            return new PerfumeCategoryDTO
+            return new CategoryDTO
             {
                 Id = perfumeCategory.Id,
                 Name = perfumeCategory.Name
             };
         }
 
-        public async Task<PerfumeCategoryDTO> UpdatePerfumeCategory(int id, UpdatePerfumeCategoryDTO dto)
+        public async Task<CategoryDTO> UpdatePerfumeCategory(int id, UpdateCategoryDTO dto)
         {
             //Here we cannot use use the above existing method to fetch the details as it has asNoTracking method.
-            var perfumeCategoryEntity = await dbContext.PerfumeCategories.FirstOrDefaultAsync(pc => pc.Id == id); 
+            var perfumeCategoryEntity = await dbContext.Categories.FirstOrDefaultAsync(pc => pc.Id == id); 
 
             perfumeCategoryEntity.Name = dto.Name;
             await dbContext.SaveChangesAsync();
 
-            return new PerfumeCategoryDTO
+            return new CategoryDTO
             {
                 Id = perfumeCategoryEntity.Id,
                 Name = perfumeCategoryEntity.Name
@@ -71,13 +71,13 @@ namespace PerfumeStore.Services
 
         public async Task DeletePerfumeCategory(int id)
         {
-            var category = await dbContext.PerfumeCategories.FirstOrDefaultAsync(c => c.Id == id);
+            var category = await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
 
             var isUsed = await dbContext.Perfumes.AnyAsync(p => p.PerfumeCategoryId == id);
             if (isUsed)
                 throw new InvalidOperationException("Cannot delete category. It is associated with existing perfumes.");
 
-            dbContext.PerfumeCategories.Remove(category);
+            dbContext.Categories.Remove(category);
             await dbContext.SaveChangesAsync();
         }
 

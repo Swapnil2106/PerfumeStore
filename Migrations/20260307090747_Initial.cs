@@ -5,13 +5,13 @@
 namespace PerfumeStore.Migrations
 {
     /// <inheritdoc />
-    public partial class Initialmigration : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "PerfumeCategories",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -20,11 +20,11 @@ namespace PerfumeStore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PerfumeCategories", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PerfumeTypes",
+                name: "Types",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -33,7 +33,7 @@ namespace PerfumeStore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PerfumeTypes", x => x.Id);
+                    table.PrimaryKey("PK_Types", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,7 +43,10 @@ namespace PerfumeStore.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    StockQuantity = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PerfumeCategoryId = table.Column<int>(type: "int", nullable: false),
                     PerfumeTypeId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -51,15 +54,15 @@ namespace PerfumeStore.Migrations
                 {
                     table.PrimaryKey("PK_Perfumes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Perfumes_PerfumeCategories_PerfumeCategoryId",
+                        name: "FK_Perfumes_Categories_PerfumeCategoryId",
                         column: x => x.PerfumeCategoryId,
-                        principalTable: "PerfumeCategories",
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Perfumes_PerfumeTypes_PerfumeTypeId",
+                        name: "FK_Perfumes_Types_PerfumeTypeId",
                         column: x => x.PerfumeTypeId,
-                        principalTable: "PerfumeTypes",
+                        principalTable: "Types",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -82,10 +85,10 @@ namespace PerfumeStore.Migrations
                 name: "Perfumes");
 
             migrationBuilder.DropTable(
-                name: "PerfumeCategories");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "PerfumeTypes");
+                name: "Types");
         }
     }
 }
