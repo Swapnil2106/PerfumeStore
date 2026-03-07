@@ -18,15 +18,15 @@ namespace PerfumeStore.Services
         {
             var perfumesList = await dbContext.Perfumes
                 .AsNoTracking()
-                .Include(p => p.PerfumeCategory)
-                .Include(p => p.PerfumeType)
+                .Include(p => p.Category)
+                .Include(p => p.Type)
                 .Select(p => new PerfumeDTO
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Price = p.Price,
-                    Category = p.PerfumeCategory.Name,
-                    Type = p.PerfumeType.Name
+                    Category = p.Category.Name,
+                    Type = p.Type.Name
                 }).ToListAsync();
 
             return perfumesList;
@@ -38,8 +38,8 @@ namespace PerfumeStore.Services
             {
                 Name = dto.Name,
                 Price = dto.Price,
-                PerfumeCategoryId = dto.PerfumeCategoryId,
-                PerfumeTypeId = dto.PerfumeTypeId
+                CategoryId = dto.PerfumeCategoryId,
+                TypeId = dto.PerfumeTypeId
             };
 
             dbContext.Perfumes.Add(createPerfume);
@@ -69,8 +69,8 @@ namespace PerfumeStore.Services
                     Id = p.Id,
                     Name = p.Name,
                     Price = p.Price,
-                    Category = p.PerfumeCategory.Name,
-                    Type = p.PerfumeType.Name
+                    Category = p.Category.Name,
+                    Type = p.Type.Name
                 })
                 .FirstOrDefaultAsync();
 
@@ -84,8 +84,8 @@ namespace PerfumeStore.Services
 
             perfumeEntity.Name = dto.Name;
             perfumeEntity.Price = dto.Price;
-            perfumeEntity.PerfumeCategoryId = dto.PerfumeCategoryId;
-            perfumeEntity.PerfumeTypeId = dto.PerfumeTypeId;
+            perfumeEntity.CategoryId = dto.PerfumeCategoryId;
+            perfumeEntity.TypeId = dto.PerfumeTypeId;
             await dbContext.SaveChangesAsync();
 
             var updatedPerfume = await dbContext.Perfumes
@@ -96,8 +96,8 @@ namespace PerfumeStore.Services
                 Id = p.Id,
                 Name = p.Name,
                 Price = p.Price,
-                Category = p.PerfumeCategory.Name,
-                Type = p.PerfumeType.Name
+                Category = p.Category.Name,
+                Type = p.Type.Name
             })
             .FirstOrDefaultAsync();
 

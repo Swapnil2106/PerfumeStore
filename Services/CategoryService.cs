@@ -73,7 +73,7 @@ namespace PerfumeStore.Services
         {
             var category = await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
 
-            var isUsed = await dbContext.Perfumes.AnyAsync(p => p.PerfumeCategoryId == id);
+            var isUsed = await dbContext.Perfumes.AnyAsync(p => p.CategoryId == id);
             if (isUsed)
                 throw new InvalidOperationException("Cannot delete category. It is associated with existing perfumes.");
 

@@ -73,7 +73,7 @@ namespace PerfumeStore.Services
         {
             var type = await dbContext.Types.FirstOrDefaultAsync(c => c.Id == id);
 
-            var isUsed = await dbContext.Perfumes.AnyAsync(p => p.PerfumeTypeId == id);
+            var isUsed = await dbContext.Perfumes.AnyAsync(p => p.TypeId == id);
             if (isUsed)
                 throw new InvalidOperationException("Cannot delete type. It is associated with existing perfumes.");
 

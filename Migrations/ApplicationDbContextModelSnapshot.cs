@@ -46,6 +46,9 @@ namespace PerfumeStore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -56,23 +59,20 @@ namespace PerfumeStore.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PerfumeCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PerfumeTypeId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("StockQuantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("TypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("PerfumeCategoryId");
+                    b.HasIndex("CategoryId");
 
-                    b.HasIndex("PerfumeTypeId");
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Perfumes");
                 });
@@ -96,21 +96,21 @@ namespace PerfumeStore.Migrations
 
             modelBuilder.Entity("PerfumeStore.Models.Perfume", b =>
                 {
-                    b.HasOne("PerfumeStore.Models.Category", "PerfumeCategory")
+                    b.HasOne("PerfumeStore.Models.Category", "Category")
                         .WithMany("Perfumes")
-                        .HasForeignKey("PerfumeCategoryId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PerfumeStore.Models.Type", "PerfumeType")
+                    b.HasOne("PerfumeStore.Models.Type", "Type")
                         .WithMany("Perfumes")
-                        .HasForeignKey("PerfumeTypeId")
+                        .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("PerfumeCategory");
+                    b.Navigation("Category");
 
-                    b.Navigation("PerfumeType");
+                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("PerfumeStore.Models.Category", b =>

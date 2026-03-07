@@ -19,14 +19,14 @@ namespace PerfumeStore.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Perfume>()
-                .HasOne(p => p.PerfumeCategory)
+                .HasOne(p => p.Category)
                 .WithMany(p => p.Perfumes)
-                .HasForeignKey(p => p.PerfumeCategoryId);
+                .HasForeignKey(p => p.CategoryId);
 
             modelBuilder.Entity<Perfume>()
-                .HasOne(p => p.PerfumeType)
+                .HasOne(p => p.Type)
                 .WithMany(p => p.Perfumes)
-                .HasForeignKey(p => p.PerfumeTypeId);
+                .HasForeignKey(p => p.TypeId);
         }
     }
 }
