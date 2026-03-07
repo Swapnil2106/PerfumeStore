@@ -1,4 +1,4 @@
-﻿using PerfumeStore.DTOs;
+﻿using PerfumeStore.DTOs.Category;
 using PerfumeStore.Models;
 
 namespace PerfumeStore.Services

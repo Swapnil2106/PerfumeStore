@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PerfumeStore.DTOs
+namespace PerfumeStore.DTOs.Perfume
 {
     public class AddPerfumeDTO
     {

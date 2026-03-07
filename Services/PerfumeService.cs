@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PerfumeStore.Data;
-using PerfumeStore.DTOs;
+using PerfumeStore.DTOs.Perfume;
 using PerfumeStore.Models;
 
 namespace PerfumeStore.Services

@@ -1,4 +1,4 @@
-﻿using PerfumeStore.DTOs;
+﻿using PerfumeStore.DTOs.Perfume;
 
 namespace PerfumeStore.Services
 {

@@ -1,4 +1,4 @@
-﻿namespace PerfumeStore.DTOs
+﻿namespace PerfumeStore.DTOs.Category
 {
     public class UpdateCategoryDTO
     {

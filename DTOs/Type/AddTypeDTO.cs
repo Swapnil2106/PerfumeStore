@@ -1,4 +1,4 @@
-﻿namespace PerfumeStore.DTOs
+﻿namespace PerfumeStore.DTOs.Type
 {
     public class AddTypeDTO
     {

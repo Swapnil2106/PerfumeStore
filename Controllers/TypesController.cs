@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PerfumeStore.DTOs;
+using PerfumeStore.DTOs.Type;
 using PerfumeStore.Services;
 
 namespace PerfumeStore.Controllers
