@@ -24,6 +24,7 @@ namespace PerfumeStore
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ITypeService, TypeService>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<ICartService, CartService>();
 
             //Added as part of Jwt Authentication
             var jwtSettings = builder.Configuration.GetSection("Jwt");
