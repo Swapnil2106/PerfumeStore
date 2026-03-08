@@ -16,6 +16,8 @@ namespace PerfumeStore.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -40,6 +42,21 @@ namespace PerfumeStore.Data
                .HasOne(ci => ci.Cart)
                .WithMany(c => c.CartItems)
                .HasForeignKey(ci => ci.CartId);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(ci => ci.Perfume)
+                .WithMany()
+                .HasForeignKey(ci => ci.PerfumeId);
+
+            modelBuilder.Entity<Order>()
+                .HasOne(c => c.User)
+                .WithMany()
+                .HasForeignKey(c => c.UserId);
+
+            modelBuilder.Entity<OrderItem>()
+               .HasOne(ci => ci.Order)
+               .WithMany(c => c.OrderItems)
+               .HasForeignKey(ci => ci.OrderId);
 
             modelBuilder.Entity<CartItem>()
                 .HasOne(ci => ci.Perfume)
