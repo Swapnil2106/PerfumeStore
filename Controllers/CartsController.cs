@@ -30,5 +30,14 @@ namespace PerfumeStore.Controllers
 
             return Ok(message);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCart()
+        {
+            var userId = GetUserId();
+            var result = await cartService.GetCart(userId);
+
+            return Ok(result);
+        }
     }
 }

@@ -52,5 +52,17 @@ namespace PerfumeStore.Services
 
             return "Item added to cart";
         }
+
+        public async Task<object> GetCart(int userId)
+        {
+            var cart = await dbContext.Carts.AsNoTracking().Include(c => c.CartItems).ThenInclude(ci => ci.Perfume).FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if(cart == null)
+            {
+                return "Cart is Empty";
+            }
+
+            return cart;
+        }
     }
 }
