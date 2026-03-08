@@ -39,5 +39,13 @@ namespace PerfumeStore.Controllers
 
             return Ok(result);
         }
+
+        [HttpDelete("remove/{id}")]
+        public async Task<IActionResult> RemoveFromCart(int id)
+        {
+            var result = await cartService.RemoveFromCart(id);
+
+            return Ok(result);
+        }
     }
 }

@@ -64,5 +64,15 @@ namespace PerfumeStore.Services
 
             return cart;
         }
+
+        public async Task<string> RemoveFromCart(int cartItemId)
+        {
+            var cartItemTobeRemoved = await dbContext.CartItems.FindAsync(cartItemId);
+
+            dbContext.CartItems.Remove(cartItemTobeRemoved);
+            await dbContext.SaveChangesAsync();
+
+            return "Item removed from the cart";
+        }
     }
 }

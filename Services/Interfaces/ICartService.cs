@@ -6,5 +6,6 @@ namespace PerfumeStore.Services.Interfaces
     {
         Task<string> AddToCart(int userId, AddToCartDTO dto);
         Task<object> GetCart(int userId);
+        Task<string> RemoveFromCart(int cartItemId);
     }
 }
