@@ -1,7 +1,10 @@
-﻿namespace PerfumeStore.Services.Interfaces
+﻿using PerfumeStore.Models;
+
+namespace PerfumeStore.Services.Interfaces
 {
     public interface IOrderService
     {
-        Task<object> GetUserOrders(int userId);
+        Task<List<Order>> GetUserOrders(int userId);
+        Task<string> Checkout(int userId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PerfumeStore.Services.Interfaces;
 using System.Security.Claims;
@@ -7,6 +8,7 @@ namespace PerfumeStore.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrdersController : ControllerBase
     {
         private readonly IOrderService orderService;
@@ -28,6 +30,15 @@ namespace PerfumeStore.Controllers
             var allOrders = await orderService.GetUserOrders(userId);
 
             return Ok(allOrders);
+        }
+
+        [HttpPost("Checkout")]
+        public async Task<IActionResult> Checkout()
+        {
+            var userId = GetUserId();
+            var result = await orderService.Checkout(userId);
+
+            return Ok(result);
         }
     }
 }
