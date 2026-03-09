@@ -1,4 +1,4 @@
-﻿namespace PerfumeStore.Models
+﻿namespace PerfumeStore.Models.Enums
 {
     public enum UserRole
     {

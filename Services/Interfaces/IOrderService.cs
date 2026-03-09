@@ -1,4 +1,5 @@
 ﻿using PerfumeStore.Models;
+using PerfumeStore.Models.Enums;
 
 namespace PerfumeStore.Services.Interfaces
 {
@@ -6,5 +7,6 @@ namespace PerfumeStore.Services.Interfaces
     {
         Task<List<Order>> GetUserOrders(int userId);
         Task<string> Checkout(int userId);
+        Task<string> UpdateOrderStatus(int orderId, OrderStatus status);
     }
 }

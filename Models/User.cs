@@ -1,4 +1,6 @@
-﻿namespace PerfumeStore.Models
+﻿using PerfumeStore.Models.Enums;
+
+namespace PerfumeStore.Models
 {
     public class User
     {

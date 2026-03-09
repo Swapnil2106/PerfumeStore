@@ -2,6 +2,7 @@
 using Microsoft.Identity.Client;
 using PerfumeStore.Data;
 using PerfumeStore.Models;
+using PerfumeStore.Models.Enums;
 using PerfumeStore.Services.Interfaces;
 
 namespace PerfumeStore.Services
@@ -35,7 +36,7 @@ namespace PerfumeStore.Services
             {
                 UserId = userId,
                 OrderDate = DateTime.UtcNow,
-                Status = "Pending",
+                Status = OrderStatus.Pending,
                 TotalAmount = 0
             };
 
@@ -64,6 +65,22 @@ namespace PerfumeStore.Services
             await dbContext.SaveChangesAsync();
 
             return "Order Placed Successfully";
+        }
+
+        public async Task<string> UpdateOrderStatus(int orderId, OrderStatus status)
+        {
+            var order = await dbContext.Orders.FindAsync(orderId);
+
+            if(order == null)
+            {
+                throw new Exception("Order not Found");
+            }
+
+            order.Status = status;
+
+            await dbContext.SaveChangesAsync();
+
+            return "Order status updated Successfully";
         }
     }
 }

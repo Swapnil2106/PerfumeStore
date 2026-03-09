@@ -1,4 +1,4 @@
-﻿using PerfumeStore.Models;
+﻿using PerfumeStore.Models.Enums;
 
 namespace PerfumeStore.DTOs.Auth
 {
